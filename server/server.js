@@ -3,6 +3,8 @@ let mongoose = require("mongoose");
 let cors = require("cors");
 let bodyParser = require("body-parser");
 let database = require("./database/db");
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 
 const todoRoute = require("../server/routes/todo.routes");
 
@@ -13,13 +15,15 @@ mongoose
   })
   .then(
     () => {
-      console.log("Database connected sucessfully !");
+      console.log("Database connected sucessfully!");
     },
     (error) => {
       console.log("Database could not be connected : " + error);
     }
   );
 const app = express();
+
+// Middlewhere
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -27,13 +31,16 @@ app.use(
   })
 );
 app.use(cors());
+
+// Routes
 app.use("/todos", todoRoute);
 
-const port = 4000;
+const port = process.env.APP_PORT || 4500;
 app.listen(port, () => {
   console.log("Connected to port " + port);
 });
-// Error Handling
+
+// Error Handling, last resort
 app.use((req, res, next) => {
   next(res.status(404));
 });
