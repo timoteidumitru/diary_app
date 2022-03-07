@@ -3,10 +3,8 @@ let mongoose = require("mongoose");
 let cors = require("cors");
 let bodyParser = require("body-parser");
 let database = require("./database/db");
-const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 
-const todoRoute = require("../server/routes/todo.routes");
+const diaryRoute = require("../server/routes/diary.routes");
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -33,9 +31,9 @@ app.use(
 app.use(cors());
 
 // Routes
-app.use("/todos", todoRoute);
+app.use("/", diaryRoute);
 
-const port = process.env.APP_PORT || 4500;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log("Connected to port " + port);
 });

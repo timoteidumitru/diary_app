@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-let todoSchema = new Schema(
+let diarySchema = new Schema(
   {
     title: {
       type: String,
@@ -13,7 +13,7 @@ let todoSchema = new Schema(
     },
   },
   {
-    collection: "todos",
+    collection: "diaries",
   }
 );
-module.exports = mongoose.model("Todo", todoSchema);
+module.exports = mongoose.model("Diary", diarySchema);

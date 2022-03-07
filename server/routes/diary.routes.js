@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-let todo = require("../models/todo-schema");
+let diary = require("../models/diary-schema");
 
-router.route("/create").post((req, res, next) => {
-  todo.create(req.body, (error, data) => {
+router.route("/diary/create").post((req, res, next) => {
+  diary.create(req.body, (error, data) => {
     if (error) {
       return next(error);
     } else {
@@ -11,8 +11,8 @@ router.route("/create").post((req, res, next) => {
     }
   });
 });
-router.route("/").get((req, res, next) => {
-  todo.find((error, data) => {
+router.route("/diaries").get((req, res, next) => {
+  diary.find((error, data) => {
     if (error) {
       return next(error);
     } else {

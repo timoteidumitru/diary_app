@@ -6,18 +6,19 @@ export default function DiaryForm() {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [text, setText] = useState("");
-  const [item, setItem] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/todos")
+      .get("http://localhost:4000/diaries")
       .then((res) => {
-        setItem(res.data.reverse());
+        let diaries = res.data.reverse();
+        setItems(diaries);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [items]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -26,7 +27,7 @@ export default function DiaryForm() {
       date: date,
       text: text,
     };
-    setItem((prevState) => {
+    setItems((prevState) => {
       if (!prevState) {
         return itemObject;
       } else {
@@ -34,7 +35,7 @@ export default function DiaryForm() {
       }
     });
     axios
-      .post("http://localhost:4000/todos/create", itemObject)
+      .post("http://localhost:4000/diary/create", itemObject)
       .then((res) => {
         console.log(res);
       })
@@ -73,7 +74,7 @@ export default function DiaryForm() {
           Add Your Entry
         </button>
       </form>
-      <ShowData date={item} />
+      <ShowData date={items} />
     </div>
   );
 }
