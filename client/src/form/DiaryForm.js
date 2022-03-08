@@ -9,16 +9,15 @@ export default function DiaryForm() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/diaries")
-      .then((res) => {
-        let diaries = res.data.reverse();
-        setItems(diaries);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [items]);
+    const fetchData = async () => {
+      const result = await axios(`http://localhost:4000/diaries`);
+      setItems(result.data);
+    };
+
+    fetchData();
+  }, [items.length, setItems]);
+
+  // console.log(items);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +36,7 @@ export default function DiaryForm() {
     axios
       .post("http://localhost:4000/diary/create", itemObject)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);

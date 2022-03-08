@@ -9,7 +9,8 @@ let diarySchema = new Schema(
       type: String,
     },
     date: {
-      type: Date,
+      type: String,
+      default: Date("DD/MM/YYYY"),
     },
   },
   {
