@@ -3,6 +3,7 @@ let mongoose = require("mongoose");
 let cors = require("cors");
 let bodyParser = require("body-parser");
 let database = require("./database/db");
+require("dotenv").config();
 
 const diaryRoute = require("../server/routes/diary.routes");
 

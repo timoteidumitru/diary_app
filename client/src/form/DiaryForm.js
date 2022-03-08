@@ -11,7 +11,7 @@ export default function DiaryForm() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(`http://localhost:4000/diaries`);
-      setItems(result.data);
+      setItems(result.data.reverse());
     };
 
     fetchData();
